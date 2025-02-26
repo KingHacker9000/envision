@@ -1,0 +1,113 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    background: #202020;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+  
+  .simulation-area {
+    flex: 1;
+    position: relative;
+    background: #1A1A1A;
+  }
+  
+  .canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .simulation-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #444;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .button:hover {
+    background: #555;
+  }
+  
+  .timeline {
+    flex: 1;
+    margin-left: 1rem;
+  }
+  
+  .timeline input[type="range"] {
+    width: 100%;
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    background: #1F1F1F;
+    overflow-y: auto;
+    position: relative; /* needed for resizer to be absolutely positioned */
+  }
+  
+  /* The draggable handle on the left edge of .sidebar */
+  .resizer {
+    position: absolute;
+    top: 0;
+    left: 0;            /* so it sits on the left edge of the sidebar */
+    width: 5px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0); /* invisible background, can set to #444 if you like */
+  }
+  
+  /* Panels inside the sidebar */
+  .panel {
+    margin: 1rem;
+    background: #2A2A2A;
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .panel h3 {
+    margin-top: 0;
+  }
+  
+  .panel label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  
+  .panel input,
+  .panel select {
+    padding: 0.5rem;
+    background: #222;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin-top: 0.5rem;
+  }
+  
+  .action-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  

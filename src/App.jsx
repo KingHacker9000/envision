@@ -8,16 +8,17 @@ function App() {
 
   return (
     <>
-        <Canvas shadows camera={{ position: [0, 0, 0], fov: 30 }}>
+        <Experience />
+        {/* <Canvas shadows camera={{ position: [0, 0, 0], fov: 30 }}>
         <Loader />
-          {/* <color attach="background" args={["#02ccfe"]} />
+          <color attach="background" args={["#02ccfe"]} />
           <Suspense fallback={<Loader />}>
             <Physics>
               <Experience />
               
             </Physics>
-          </Suspense> */}
-        </Canvas>
+          </Suspense>
+        </Canvas> */}
         
     </>
   );
