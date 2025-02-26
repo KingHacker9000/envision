@@ -1,9 +1,11 @@
-# R3F Starter Project 🚀
+# Natural Disaster Visualization Project 🚀
 
-Welcome to the **R3F Starter Project**! This template is designed to help you kickstart your journey with React Three Fiber (R3F) and create stunning 3D web applications with ease.
+Welcome to the **Natural Disaster Visualization Project**! This project aims to create an interactive web-based visualization tool that allows users to simulate the effects of flooding in their towns and neighborhoods. The primary goal is to raise awareness about climate change and its impact while supporting a fundraising effort of $500,000 CAD for further research and climate mitigation strategies.
 
 ## Table of Contents 📚
-- [Introduction](#introduction-)
+
+- [Overview](#overview)
+- [Goals & Objectives](#goals--objectives)
 - [Features](#features-)
 - [Getting Started](#getting-started-)
 - [Project Structure](#project-structure-)
@@ -12,9 +14,16 @@ Welcome to the **R3F Starter Project**! This template is designed to help you ki
 - [Contributing](#contributing-)
 - [License](#license-)
 
-## Introduction 🌟
+## Overview 📌
 
-This project is a boilerplate for creating 3D web applications using React Three Fiber, a powerful library that brings the power of Three.js to React. Whether you're a seasoned developer or just starting out, this template provides a solid foundation to build upon.
+This project aims to create an interactive web-based visualization tool that allows users to simulate the effects of flooding in their towns and neighborhoods. The primary goal is to raise awareness about climate change and its impact while supporting a fundraising effort of $500,000 CAD for further research and climate mitigation strategies.
+
+## Goals & Objectives 🎯
+
+- **Awareness**: Help the public visualize climate risks in their communities.
+- **Fundraising**: Support research efforts in climate change mitigation.
+- **Interactive Simulation**: Allow users to adjust flood severity, water levels, and location dynamically.
+- **Scalability**: Design a modular system to incorporate other natural disasters (wildfires, hurricanes, earthquakes) in the future.
 
 ## Features ✨
 
@@ -30,8 +39,8 @@ To get started with this project, follow these steps:
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/your-username/r3f-starter.git
-    cd r3f-starter
+    git clone https://github.com/KingHacker9000/envision.git
+    cd envision
     ```
 
 2. **Install dependencies**:
@@ -65,6 +74,7 @@ r3f-starter/
 ├── public/                 # Static assets
 ├── src/                    # Source code
 │   ├── components/         # React components
+│   │   ├── Experience.css  # Main 3D experience styles
 │   │   ├── Experience.jsx  # Main 3D experience component
 │   │   ├── Loader.jsx      # Loading screen component
 │   │   └── Loader.css      # Styles for the loader
