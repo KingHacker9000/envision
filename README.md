@@ -1,6 +1,6 @@
 # Natural Disaster Visualization Project 🚀
 
-Welcome to the **Natural Disaster Visualization Project**! This project aims to create an interactive web-based visualization tool that allows users to simulate the effects of flooding in their towns and neighborhoods. The primary goal is to raise awareness about climate change and its impact while supporting a fundraising effort of $500,000 CAD for further research and climate mitigation strategies.
+Welcome to the **Natural Disaster Visualization Project**! This project aims to create an interactive web-based visualization tool that allows users to simulate the effects of flooding in their towns and neighborhoods. The primary goal is to raise awareness about climate change and its impact and for further research and climate mitigation strategies.
 
 ## Table of Contents 📚
 
@@ -16,7 +16,7 @@ Welcome to the **Natural Disaster Visualization Project**! This project aims to 
 
 ## Overview 📌
 
-This project aims to create an interactive web-based visualization tool that allows users to simulate the effects of flooding in their towns and neighborhoods. The primary goal is to raise awareness about climate change and its impact while supporting a fundraising effort of $500,000 CAD for further research and climate mitigation strategies.
+This project aims to create an interactive web-based visualization tool that allows users to simulate the effects of flooding in their towns and neighborhoods. The primary goal is to raise awareness about climate change and its impact.
 
 ## Goals & Objectives 🎯
 
