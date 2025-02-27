@@ -5,14 +5,9 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import axios from "axios";
 
-//const API_URL = window.location.origin + "/api/get-3d-tiles"; // Change to your backend URL
-const API_URL = "http://localhost:5000/api/get-3d-tiles"; // Change to your backend URL
+const API_URL = window.location.origin + "/api/get-3d-tiles"; // Change to your backend URL
+//const API_URL = "http://localhost:5000/api/get-3d-tiles"; // Change to your backend URL
 window.INDICIES = [2, 1, 0, 2, 0, 2, 3, 3, 3, 0, 1, 0, 0, 0, 0, 3, 2, 1, 0, 0, 0];
-
-function Model({ glbUrl }) {
-  const { scene } = useGLTF(glbUrl);
-  return <primitive object={scene} scale={1} />;
-}
 
 // A simple placeholder 3D object in the scene
 function ModelPlaceholder({ ModelRef = null }) {
@@ -59,6 +54,21 @@ function GoogleTiles({ apiUrl, ModelRef, lat, long, indicies }) {
   console.log("Loaded GLTF Materials:", materials);
   console.log("Loaded Scene:", scene);
 
+  if (indicies.length < 5) {
+    return (
+      <group ref={ModelRef} dispose={null} scale={[0.0001, 0.0001, 0.0001]} position={[scene.children[0].position.x/10000, scene.children[0].position.y/10000, scene.children[0].position.z/10000]}>
+        {Object.keys(nodes).map((key) => (
+          <mesh
+            key={key}
+            castShadow
+            receiveShadow
+            geometry={nodes[key].geometry}
+            material={nodes[key].material}
+          />
+        ))}
+      </group>
+    );
+  }
 
   return (
     <group ref={ModelRef} dispose={null} scale={[0.1, 0.1, 0.1]} position={[scene.children[0].position.x/10, scene.children[0].position.y/10, scene.children[0].position.z/10]}>
@@ -229,17 +239,6 @@ export function Experience() {
     }
   }
 
-  const addOneToIndices = (indicies, zoom) => {
-    let Added = false;
-
-    indicies[indicies.length-1] += 1;
-    for (let i = indicies.length-1; i >= 0; i--) {
-      if (indicies[i] > 3) {
-        indicies[i] = 0;
-        indicies[i-1] += 1;
-      }
-    }
-  }
 
   const addOneRightToIndices = (indicies, zoom) => {
 
@@ -295,10 +294,10 @@ export function Experience() {
     let newTiles = [];
     let newTilesInfos = [];
 
-    let lat = document.getElementById("Lat").value || 0;
-    let long = document.getElementById("Long").value || 0;
-    let latEnd = document.getElementById("LatEnd").value || 0;
-    let longEnd = document.getElementById("LongEnd").value || 0;
+    let lat = document.getElementById("Lat").value || 43.658518762655255;
+    let long = document.getElementById("Long").value || -79.39809738990337;
+    let latEnd = document.getElementById("LatEnd").value || 43.668597829694754;
+    let longEnd = document.getElementById("LongEnd").value || -79.39416841221698;
     let zoom = document.getElementById("Zoom").value || 19;
 
     const BLIndices = await getIndices(lat, long, zoom);
@@ -357,10 +356,6 @@ export function Experience() {
           <Canvas className="canvas">
             <ambientLight intensity={0.5} />
             <directionalLight position={[5,10,7]} intensity={0.7} />
-            <mesh position={modelRef.current ? modelRef.current.position : [1,0,0]}>
-              <boxGeometry args={[2000,2000,2000]} />
-              <meshStandardMaterial color="#4CAF50" />
-            </mesh>
             {tiles.map((tile) => tile)}
             <OrbitControls maxDistance={1000000} ref={controlsRef} />
           </Canvas>
@@ -372,9 +367,9 @@ export function Experience() {
           <button className="button">⏯️</button>
           <button className="button">⏩</button>
           <button className="button" onClick={recenterCamera}>Recenter</button>
-          <button className="button" onClick={addTile}>Add Tile</button>
+          {/* <button className="button" onClick={addTile}>Add Tile</button> */}
           <button className="button" onClick={addArea}>Add Area</button>
-          <button className="button" onClick={addEarth}>Add Earth</button>
+          {/* <button className="button" onClick={addEarth}>Add Earth</button> */}
           <button className="button" onClick={clear}>CLEAR</button>
           <div className="timeline">
             <input type="range" min="0" max="100" />

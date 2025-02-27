@@ -7,16 +7,18 @@ import { fileURLToPath } from "url";
 import axios from "axios";
 import cors from "cors";
 import dotenv from "dotenv";
-import { json } from "stream/consumers";
+import crypto from "crypto";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // Add this line
 app.use(cors());
+const sessionSecret = crypto.randomBytes(32).toString("hex");
+
 app.use(
   session({
-    secret: "YV^(dfg46TUV&^#G*&*^DRF^G&H*J", // Change this to a random secure key
+    secret: sessionSecret, // Random secure key
     resave: false, // Avoid resaving if nothing has changed
     saveUninitialized: true, // Save new sessions
     cookie: {
@@ -56,46 +58,122 @@ const setSession = async (req, res) => {
 };
 
 const indiciesFromCoordinates = (latitude, longitude, zoom) => {
-  if (longitude < 0 && longitude > -90 && latitude > 0 && latitude < 90) {
-    const indicies = [2,1]
 
-    let L_long = -90;
-    let R_long = 0;
-    let T_lat = 90;
-    let B_lat = 0;
+  let indicies = [2,1];
+  let L_long = -90;
+  let R_long = 0;
+  let T_lat = 90;
+  let B_lat = 0;
 
-    for (let i = 2; i < zoom; i++) {
-      if ((i+1)%5==0) {
-        indicies.push(0);
-        continue;
-      }
-      let index = 0;
+  if (longitude <= 0 && longitude >= -90 && latitude >= 0 && latitude <= 90) {
+    indicies = [2,1];
 
-      if (Math.abs((L_long+R_long)/2) > Math.abs(longitude)) {
-        index += 1
-        L_long = (L_long+R_long)/2
-      }
-      else {
-        R_long = (L_long+R_long)/2
-      }
+    L_long = -90;
+    R_long = 0;
+    T_lat = 90;
+    B_lat = 0;
 
-      if ((T_lat+B_lat)/2 < latitude) {
-        index += 2
-        B_lat = (T_lat+B_lat)/2
-      }
-      else {
-        T_lat = (T_lat+B_lat)/2
-      }
-
-      indicies.push(index);
-      
-    }
-    console.log("Indicies:",indicies);
-
-    return indicies;
   }
 
-  return [0,0];
+  else if (longitude <= -90 && longitude >= -180 && latitude >= 0 && latitude <= 90) {
+    indicies = [2,0]
+
+    L_long = -180;
+    R_long = -90;
+    T_lat = 90;
+    B_lat = 0;
+  }
+
+  else if (longitude >= 0 && longitude <= 90 && latitude <= 0 && latitude >= -90) {
+
+    indicies = [1,0]
+
+    L_long = 0;
+    R_long = 90;
+    T_lat = 0;
+    B_lat = -90;
+  }
+
+  else if (longitude >= 90 && longitude <= 180 && latitude <= 0 && latitude >= -90) {
+
+    indicies = [1,1]
+
+    L_long = 90;
+    R_long = 180;
+    T_lat = 0;
+    B_lat = -90;
+  }
+
+  else if (longitude <= -90 && longitude >= -180 && latitude <= 0 && latitude >= -90) {
+
+    indicies = [0, 0]
+
+    L_long = -180;
+    R_long = -90;
+    T_lat = 0;
+    B_lat = -90;
+  }
+
+  else if (longitude <= 0 && longitude >= -90 && latitude <= 0 && latitude >= -90) {
+
+    indicies = [0, 1]
+
+    L_long = -90;
+    R_long = 0;
+    T_lat = 0;
+    B_lat = -90;
+  }
+
+  else if (longitude >= 0 && longitude <= 90 && latitude >= 0 && latitude <= 90) {
+
+    indicies = [3, 0]
+
+    L_long = 0;
+    R_long = 90;
+    T_lat = 90;
+    B_lat = 0;
+  }
+
+  else if (longitude >= 90 && longitude <= 180 && latitude >= 0 && latitude <= 90) {
+
+    indicies = [3, 1]
+
+    L_long = 90;
+    R_long = 180;
+    T_lat = 90;
+    B_lat = 0;
+  }
+
+  for (let i = 2; i < zoom; i++) {
+    if ((i+1)%5==0) {
+      indicies.push(0);
+      continue;
+    }
+    let index = 0;
+
+    if (Math.abs((L_long+R_long)/2) > Math.abs(longitude)) {
+      index += 1
+      L_long = (L_long+R_long)/2
+    }
+    else {
+      R_long = (L_long+R_long)/2
+    }
+
+    if ((T_lat+B_lat)/2 < latitude) {
+      index += 2
+      B_lat = (T_lat+B_lat)/2
+    }
+    else {
+      T_lat = (T_lat+B_lat)/2
+    }
+
+    indicies.push(index);
+    
+  }
+
+  console.log("Indicies:",indicies);
+
+  return indicies;
   
 }
 
