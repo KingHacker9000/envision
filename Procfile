@@ -1,1 +1,1 @@
-web: sudo ./run.bash
+web: node server.js
