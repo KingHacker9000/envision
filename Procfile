@@ -1,1 +1,1 @@
-web: ./run.bash
+web: sudo ./run.bash
